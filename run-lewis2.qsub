@@ -1,0 +1,9 @@
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=24:00:00
+#PBS -N cityFormat
+#PBS -j oe
+
+cd /users/a/r/areagan/scratch/geotweets
+
+perl pullTweets.pl -ucm "start=${PLDATE}-00-00" "end=${PLDATE}-23-59" "boxes=[240]" | python forlewis-2.py ${DATE}
+
