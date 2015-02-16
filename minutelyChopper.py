@@ -16,8 +16,9 @@ from json import loads
 import codecs
 import datetime
 import sys
+import os
 
-if __name__ == '__main__':
+def chop():
     f = sys.stdin
     for line in f:
         try:
@@ -28,8 +29,8 @@ if __name__ == '__main__':
             if tweet['created_at']:
                 d = datetime.datetime.strptime(tweet['created_at'],'%a %b %d %H:%M:%S +0000 %Y')-datetime.timedelta(hours=5)
                 # newer folder format
-                # g = open('minutely-raw/{0}/{1}'.format(d.strftime('%Y-%m-%d'),d.strftime('twitter.%S.%M.%H.%d.%y.json')),'a')
-                g = open('minutely-raw2/{0}/{1}'.format(d.strftime('%d.%m.%y'),d.strftime('twitter.%S.%M.%H.%d.%y.json')),'a')
+                g = open('minutely/{0}/{1}'.format(d.strftime('%Y-%m-%d'),d.strftime('twitter.%S.%M.%H.%d.%y.json')),'a')
+                # g = open('minutely/{0}/{1}'.format(d.strftime('%d.%m.%y'),d.strftime('twitter.%S.%M.%H.%d.%y.json')),'a')
                 g.write(line)
                 g.close()
         except:
@@ -37,6 +38,21 @@ if __name__ == '__main__':
             pass
 
     f.close()
+
+def makedirectories(year):
+    d = datetime.datetime(year,1,1)
+    e = datetime.datetime(year+1,1,1)
+    while d < e:
+        if not os.path.isdir('minutely/{0}'.format(d.strftime('%Y-%m-%d'))):
+            print 'making directory minutely/{0}'.format(d.strftime('%Y-%m-%d'))
+            os.mkdir('minutely/{0}'.format(d.strftime('%Y-%m-%d')))
+        else:
+            print 'directory minutely/{0} exists'.format(d.strftime('%Y-%m-%d'))
+        d += datetime.timedelta(days=1)
+
+if __name__ == '__main__':
+    makedirectories(2014)
+    # chop()
 
 
 
