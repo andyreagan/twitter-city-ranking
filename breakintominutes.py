@@ -50,9 +50,21 @@ def makedirectories(year):
             print 'directory minutely/{0} exists'.format(d.strftime('%Y-%m-%d'))
         d += datetime.timedelta(days=1)
 
+def renameraw(year):
+    d = datetime.datetime(year,1,1)
+    e = datetime.datetime(year+1,1,1)
+    while d < e:
+        if os.path.isfile('zipped-raw/{0}.geo.json'.format(d.strftime('%d.%m.%y'))):
+            print 'zipped-raw/{0}.geo.json exists'.format(d.strftime('%d.%m.%y'))
+            print 'move to zipped-raw/{0}.geo.json'.format(d.strftime('%Y-%m-%d'))
+            os.rename('zipped-raw/{0}.geo.json'.format(d.strftime('%d.%m.%y')),'zipped-raw/{0}.geo.json'.format(d.strftime('%Y-%m-%d')))
+        d += datetime.timedelta(days=1)
+
+
 if __name__ == '__main__':
-    makedirectories(2014)
-    # chop()
+    # makedirectories(2014)
+    # renameraw(2014)
+    chop()
 
 
 
