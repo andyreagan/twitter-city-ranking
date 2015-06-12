@@ -1,0 +1,19 @@
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=00:45:00
+#PBS -N cityScrape
+#PBS -j oe
+
+cd /users/a/r/areagan/scratch/geotweets
+export LD_LIBRARY_PATH=/users/a/r/areagan/usr/lib
+export PATH=/users/a/r/areagan/usr/lib:/users/a/r/areagan/usr/bin:/users/a/r/areagan/usr:$PATH
+
+. pyenv/bin/activate
+
+for MINUTE in 00 15 30 45
+do
+  echo "processing ${DATE}-${HOUR}-${MINUTE}"
+  # gzip -cd /users/c/d/cdanfort/scratch/twitter/tweet-troll/zipped-raw/${DATE}/${DATE}-${HOUR}-${MINUTE}.gz | python fiona-shapely-speedtest.py "${DATE}"
+  /usr/bin/time -v gzip -cd /users/a/r/areagan/scratch/geodb/${DATE}/${DATE}-${HOUR}-${MINUTE}.gz | python fiona-shapely-speedtest.py "${DATE}"
+  echo "done"
+done
+echo "delete me"
