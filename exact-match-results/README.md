@@ -1,4 +1,6 @@
-These are the results of my best attempt to match Lewis's results.
+## These are the results of my best attempt to match Lewis's results.
+
+### I'm trying again, blocking city names only from their respective cities.
 
 I used `rankCities.py` where the I stopped the full list of words on each city:
 
