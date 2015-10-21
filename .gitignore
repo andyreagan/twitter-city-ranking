@@ -8,3 +8,4 @@ citytweets
 *.pyc
 *.out
 *.o*
+Shapely
