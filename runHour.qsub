@@ -12,8 +12,8 @@ export PATH=/users/a/r/areagan/usr/lib:/users/a/r/areagan/usr/bin:/users/a/r/are
 for MINUTE in 00 15 30 45
 do
   echo "processing ${DATE}-${HOUR}-${MINUTE}"
-  # gzip -cd /users/c/d/cdanfort/scratch/twitter/tweet-troll/zipped-raw/${DATE}/${DATE}-${HOUR}-${MINUTE}.gz | python fiona-shapely-speedtest.py "${DATE}"
-  /usr/bin/time -v gzip -cd /users/a/r/areagan/scratch/geodb/${DATE}/${DATE}-${HOUR}-${MINUTE}.gz | python fiona-shapely-speedtest.py "${DATE}"
+  # gzip -cd /users/c/d/cdanfort/scratch/twitter/tweet-troll/zipped-raw/${DATE}/${DATE}-${HOUR}-${MINUTE}.gz | python geofunctions.py "${DATE}"
+  /usr/bin/time -v gzip -cd /users/a/r/areagan/scratch/geodb/${DATE}/${DATE}-${HOUR}-${MINUTE}.gz | python geofunctions.py "${DATE}"
   echo "done"
 done
 echo "delete me"
